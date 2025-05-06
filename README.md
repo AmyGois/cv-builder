@@ -1,1 +1,1 @@
-# cv-builder
+# CV Builder - React App
