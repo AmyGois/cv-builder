@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --background-colour-main: #fefefe;
+  --background-colour-secondary: #e1e1e1;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-colour-main);
+}
+
+main {
+  flex: auto;
+}
+
+header,
+footer {
+  text-align: center;
+  background-color: var(--background-colour-secondary);
+}
