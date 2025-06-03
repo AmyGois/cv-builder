@@ -1,5 +1,13 @@
+import GeneralForm from "./GeneralForm";
+
 function CvBuilder() {
-  return <></>;
+  return (
+    <>
+      <div>
+        <GeneralForm />
+      </div>
+    </>
+  );
 }
 
 export default CvBuilder;
