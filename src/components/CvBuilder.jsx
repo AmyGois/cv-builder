@@ -1,10 +1,10 @@
 import GeneralForm from "./GeneralForm";
 
-function CvBuilder() {
+function CvBuilder({ generalProps }) {
   return (
     <>
       <div>
-        <GeneralForm />
+        <GeneralForm generalProps={generalProps} />
       </div>
     </>
   );

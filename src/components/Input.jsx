@@ -1,4 +1,4 @@
-function Input({ label, id, type = "text", accept, required }) {
+function Input({ label, id, type = "text", accept, required, onChange }) {
   return (
     <>
       <label htmlFor={id}>
@@ -10,6 +10,7 @@ function Input({ label, id, type = "text", accept, required }) {
           id={id}
           accept={accept}
           required={required}
+          onChange={onChange}
         />
       </label>
     </>
