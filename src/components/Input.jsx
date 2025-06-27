@@ -1,9 +1,16 @@
-function Input({ label, id, type = "text", accept }) {
+function Input({ label, id, type = "text", accept, required }) {
   return (
     <>
       <label htmlFor={id}>
         {label + " "}
-        <input type={type} name={id} id={id} accept={accept} />
+        {required === false && <span>(Optional) </span>}
+        <input
+          type={type}
+          name={id}
+          id={id}
+          accept={accept}
+          required={required}
+        />
       </label>
     </>
   );
