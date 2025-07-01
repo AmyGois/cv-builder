@@ -1,5 +1,6 @@
 import { useState } from "react";
-import CvBuilder from "./components/CvBuilder";
+import GeneralForm from "./components/GeneralForm";
+import ExperienceSection from "./components/ExperienceSection";
 import CvResult from "./components/CvResult";
 import "./app.css";
 
@@ -45,7 +46,12 @@ function App() {
   return (
     <>
       <section>
-        <CvBuilder generalProps={generalProps} />
+        <div>
+          <GeneralForm generalProps={generalProps} />
+        </div>
+        <div>
+          <ExperienceSection />
+        </div>
       </section>
       <section>
         <CvResult />
