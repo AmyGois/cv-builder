@@ -1,4 +1,4 @@
-function DatePicker({ id, startOrEnd, onChange }) {
+function DatePicker({ id, startOrEnd, onChangeYear, onChangeMonth }) {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
   return (
@@ -8,6 +8,7 @@ function DatePicker({ id, startOrEnd, onChange }) {
         <select
           name={startOrEnd + "-month-" + id}
           id={startOrEnd + "-month-" + id}
+          onChange={onChangeMonth}
         >
           <option value="">Month</option>
           <option value="01">January</option>
@@ -32,7 +33,7 @@ function DatePicker({ id, startOrEnd, onChange }) {
           min="1900"
           max={currentYear}
           placeholder="YYYY"
-          onChange={onChange}
+          onChange={onChangeYear}
           required
         />
       </label>
