@@ -1,6 +1,7 @@
 import { useState } from "react";
 import GeneralForm from "./components/GeneralForm";
 import ExperienceSection from "./components/ExperienceSection";
+import EducationSection from "./components/EducationSection";
 import CvResult from "./components/CvResult";
 import "./app.css";
 
@@ -328,6 +329,166 @@ function App() {
     },
   };
 
+  const [educationCourses, setEducationCourses] = useState([]);
+  const [educationLevels, setEducationLevels] = useState([]);
+  const [educationSchools, setEducationSchools] = useState([]);
+  const [educationEndDates, setEducationEndDates] = useState([]);
+  const [educationIdNum, setEducationIdNum] = useState(1);
+
+  function calculateEducationId() {
+    const newId = "EDID" + educationIdNum;
+    setEducationIdNum(educationIdNum + 1);
+
+    return newId;
+  }
+
+  function createNewEDForm() {
+    const formId = calculateEducationId();
+
+    const newCourse = {
+      id: formId,
+      course: "",
+    };
+    const courses = educationCourses;
+    courses.push(newCourse);
+    setEducationCourses(courses);
+
+    const newLevel = {
+      id: formId,
+      level: "",
+    };
+    const levels = educationLevels;
+    levels.push(newLevel);
+    setEducationLevels(levels);
+
+    const newSchool = {
+      id: formId,
+      school: "",
+    };
+    const schools = educationSchools;
+    schools.push(newSchool);
+    setEducationSchools(schools);
+
+    const newEndDate = {
+      id: formId,
+      month: "",
+      year: "",
+      stillStudying: false,
+    };
+    const endDates = educationEndDates;
+    endDates.push(newEndDate);
+    setEducationEndDates(endDates);
+  }
+
+  const educationProps = {
+    handleNewForm: createNewEDForm,
+
+    courses: educationCourses,
+    handleCourses: function (id, e) {
+      setEducationCourses(
+        educationCourses.map((course) => {
+          if (course.id === id) {
+            return {
+              ...course,
+              course: e.target.value,
+            };
+          } else {
+            return course;
+          }
+        })
+      );
+    },
+
+    levels: educationLevels,
+    handleLevels: function (id, e) {
+      setEducationLevels(
+        educationLevels.map((level) => {
+          if (level.id === id) {
+            return {
+              ...level,
+              level: e.target.value,
+            };
+          } else {
+            return level;
+          }
+        })
+      );
+    },
+
+    schools: educationSchools,
+    handleSchools: function (id, e) {
+      setEducationSchools(
+        educationSchools.map((school) => {
+          if (school.id === id) {
+            return {
+              ...school,
+              school: e.target.value,
+            };
+          } else {
+            return school;
+          }
+        })
+      );
+    },
+
+    endDates: educationEndDates,
+    handleEndMonths: function (id, e) {
+      setEducationEndDates(
+        educationEndDates.map((endDate) => {
+          if (endDate.id === id) {
+            return {
+              ...endDate,
+              month: e.target.value,
+            };
+          } else {
+            return endDate;
+          }
+        })
+      );
+    },
+    handleEndYears: function (id, e) {
+      setEducationEndDates(
+        educationEndDates.map((endDate) => {
+          if (endDate.id === id) {
+            return {
+              ...endDate,
+              year: e.target.value,
+            };
+          } else {
+            return endDate;
+          }
+        })
+      );
+    },
+    handleStillStudying: function (id, e) {
+      setEducationEndDates(
+        educationEndDates.map((endDate) => {
+          if (endDate.id === id) {
+            return {
+              ...endDate,
+              stillStudying: e.target.checked,
+            };
+          } else {
+            return endDate;
+          }
+        })
+      );
+    },
+
+    handleDeleteForm: function (id) {
+      setEducationCourses(
+        educationCourses.filter((course) => course.id !== id)
+      );
+      setEducationLevels(educationLevels.filter((level) => level.id !== id));
+      setEducationSchools(
+        educationSchools.filter((school) => school.id !== id)
+      );
+      setEducationEndDates(
+        educationEndDates.filter((endDate) => endDate.id !== id)
+      );
+    },
+  };
+
   return (
     <>
       <section>
@@ -336,6 +497,9 @@ function App() {
         </div>
         <div>
           <ExperienceSection workProps={workProps} />
+        </div>
+        <div>
+          <EducationSection educationProps={educationProps} />
         </div>
       </section>
       <section>

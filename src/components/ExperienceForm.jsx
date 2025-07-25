@@ -50,21 +50,21 @@ function ExperienceForm({
       </div>
       <div>
         {!presentDay && (
-          <DatePicker
-            id={id}
-            startOrEnd="end"
-            onChangeMonth={(e) => handlEndMonth(id, e)}
-            onChangeYear={(e) => handleEndYear(id, e)}
-          />
+          <div>
+            <DatePicker
+              id={id}
+              startOrEnd="end"
+              onChangeMonth={(e) => handlEndMonth(id, e)}
+              onChangeYear={(e) => handleEndYear(id, e)}
+            />
+          </div>
         )}
-        <div>
-          <Input
-            label="Present day?"
-            id={"present-day-" + id}
-            type="checkbox"
-            onChange={(e) => handlePresentDay(id, e)}
-          />
-        </div>
+        <Input
+          label="Present day?"
+          id={"present-day-" + id}
+          type="checkbox"
+          onChange={(e) => handlePresentDay(id, e)}
+        />
       </div>
 
       <fieldset>
