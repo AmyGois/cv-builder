@@ -2,6 +2,7 @@ import { useState } from "react";
 import GeneralForm from "./components/GeneralForm";
 import ExperienceSection from "./components/ExperienceSection";
 import EducationSection from "./components/EducationSection";
+import SkillsSection from "./components/SkillsSection";
 import CvResult from "./components/CvResult";
 import "./app.css";
 
@@ -489,6 +490,78 @@ function App() {
     },
   };
 
+  const [skillsNames, setSkillsNames] = useState([]);
+  const [skillsLevels, setSkillsLevels] = useState([]);
+  const [skillsIdNum, setSkillsIdNum] = useState(1);
+
+  function calculateSkillsId() {
+    const newId = "SKID" + skillsIdNum;
+    setSkillsIdNum(skillsIdNum + 1);
+
+    return newId;
+  }
+
+  function createNewSKForm() {
+    const formId = calculateSkillsId();
+
+    const newSkill = {
+      id: formId,
+      skillName: "",
+    };
+    const skills = skillsNames;
+    skills.push(newSkill);
+    setSkillsNames(skills);
+
+    const newLevel = {
+      id: formId,
+      level: "",
+    };
+    const levels = skillsLevels;
+    levels.push(newLevel);
+    setSkillsLevels(levels);
+  }
+
+  const skillsProps = {
+    handleNewForm: createNewSKForm,
+
+    skills: skillsNames,
+    handleSkills: function (id, e) {
+      setSkillsNames(
+        skillsNames.map((skill) => {
+          if (skill.id === id) {
+            return {
+              ...skill,
+              skillName: e.target.value,
+            };
+          } else {
+            return skill;
+          }
+        })
+      );
+    },
+
+    levels: skillsLevels,
+    handleLevels: function (id, e) {
+      setSkillsLevels(
+        skillsLevels.map((level) => {
+          if (level.id === id) {
+            return {
+              ...level,
+              level: e.target.value,
+            };
+          } else {
+            return level;
+          }
+        })
+      );
+    },
+
+    handleDeleteForm: function (id) {
+      setSkillsNames(skillsNames.filter((skill) => skill.id !== id));
+      setSkillsLevels(skillsLevels.filter((level) => level.id !== id));
+    },
+  };
+
   return (
     <>
       <section>
@@ -500,6 +573,9 @@ function App() {
         </div>
         <div>
           <EducationSection educationProps={educationProps} />
+        </div>
+        <div>
+          <SkillsSection skillsProps={skillsProps} />
         </div>
       </section>
       <section>
