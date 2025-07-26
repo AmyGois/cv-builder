@@ -3,8 +3,10 @@ import GeneralForm from "./components/GeneralForm";
 import ExperienceSection from "./components/ExperienceSection";
 import EducationSection from "./components/EducationSection";
 import SkillsSection from "./components/SkillsSection";
+import LanguageSection from "./components/LanguageSection";
 import CvResult from "./components/CvResult";
 import "./app.css";
+import LanguageForm from "./components/LanguageForm";
 
 function App() {
   const [generalName, setGeneralName] = useState("");
@@ -562,6 +564,108 @@ function App() {
     },
   };
 
+  const [languages, setLanguages] = useState([]);
+  const [languageLevels, setLanguageLevels] = useState([]);
+  const [languageCertifications, setLanguageCertifications] = useState([]);
+  const [languageIdNum, setLanguageIdNum] = useState(1);
+
+  function calculateLanguageId() {
+    const newId = "LGID" + languageIdNum;
+    setLanguageIdNum(languageIdNum + 1);
+
+    return newId;
+  }
+
+  function createNewLGForm() {
+    const formId = calculateLanguageId();
+
+    const newLanguage = {
+      id: formId,
+      language: "",
+    };
+    const langs = languages;
+    langs.push(newLanguage);
+    setLanguages(langs);
+
+    const newLevel = {
+      id: formId,
+      level: "",
+    };
+    const levels = languageLevels;
+    levels.push(newLevel);
+    setLanguageLevels(levels);
+
+    const newCertification = {
+      id: formId,
+      certification: "",
+    };
+    const certifications = languageCertifications;
+    certifications.push(newCertification);
+    setLanguageCertifications(certifications);
+  }
+
+  const languageProps = {
+    handleNewForm: createNewLGForm,
+
+    languages: languages,
+    handleLanguages: function (id, e) {
+      setLanguages(
+        languages.map((language) => {
+          if (language.id === id) {
+            return {
+              ...language,
+              language: e.target.value,
+            };
+          } else {
+            return language;
+          }
+        })
+      );
+    },
+
+    levels: languageLevels,
+    handleLevels: function (id, e) {
+      setLanguageLevels(
+        languageLevels.map((level) => {
+          if (level.id === id) {
+            return {
+              ...level,
+              level: e.target.value,
+            };
+          } else {
+            return level;
+          }
+        })
+      );
+    },
+
+    certifications: languageCertifications,
+    handleCertifications: function (id, e) {
+      setLanguageCertifications(
+        languageCertifications.map((cert) => {
+          if (cert.id === id) {
+            return {
+              ...cert,
+              certification: e.target.value,
+            };
+          } else {
+            return cert;
+          }
+        })
+      );
+    },
+
+    handleDeleteForm: function (id) {
+      setLanguages(languages.filter((language) => language.id !== id));
+      setLanguageLevels(languageLevels.filter((level) => level.id !== id));
+      setLanguageCertifications(
+        languageCertifications.filter(
+          (certification) => certification.id !== id
+        )
+      );
+    },
+  };
+
   return (
     <>
       <section>
@@ -576,6 +680,9 @@ function App() {
         </div>
         <div>
           <SkillsSection skillsProps={skillsProps} />
+        </div>
+        <div>
+          <LanguageSection languageProps={languageProps} />
         </div>
       </section>
       <section>
