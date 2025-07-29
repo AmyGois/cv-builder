@@ -1,4 +1,5 @@
 import Input from "./Input";
+import Button from "./Button";
 
 function GeneralForm({ generalProps }) {
   return (
@@ -44,14 +45,22 @@ function GeneralForm({ generalProps }) {
           required={false}
           onChange={generalProps.handlePortfolio}
         />
-        <Input
-          label="Photo"
-          id="general-photo"
-          type="file"
-          accept="image/*"
-          required={false}
-          onChange={generalProps.handlePhoto}
-        />
+        <div>
+          <Input
+            label="Photo"
+            id="general-photo"
+            type="file"
+            accept="image/*"
+            required={false}
+            onChange={generalProps.handlePhoto}
+          />
+          <Button
+            label="X"
+            ariaLabel="remove photo"
+            type="button"
+            onClick={() => generalProps.handleDeletePhoto("general-photo")}
+          />
+        </div>
       </form>
     </>
   );

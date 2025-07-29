@@ -15,7 +15,7 @@ function App() {
   const [generalPhone, setGeneralPhone] = useState("");
   const [generalAddress, setGeneralAddress] = useState("");
   const [generalPortfolio, setGeneralPortfolio] = useState("");
-  const [generalPhoto, setGeneralPhoto] = useState();
+  const [generalPhoto, setGeneralPhoto] = useState(null);
 
   const generalProps = {
     name: generalName,
@@ -45,6 +45,11 @@ function App() {
     photo: generalPhoto,
     handlePhoto: function (e) {
       setGeneralPhoto(URL.createObjectURL(e.target.files[0]));
+    },
+    handleDeletePhoto: function (id) {
+      const photoInput = document.getElementById(id);
+      setGeneralPhoto(null);
+      photoInput.value = null;
     },
   };
 
