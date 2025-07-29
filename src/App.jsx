@@ -691,7 +691,13 @@ function App() {
         </div>
       </section>
       <section>
-        <CvResult />
+        <CvResult
+          generalProps={generalProps}
+          workProps={workProps}
+          educationProps={educationProps}
+          skillsProps={skillsProps}
+          languageProps={languageProps}
+        />
       </section>
     </>
   );
